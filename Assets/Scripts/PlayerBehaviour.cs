@@ -60,5 +60,10 @@ public class PlayerBehaviour : MonoBehaviour {
             Destroy(collision.gameObject);
             lives--;
         }
+        else if(collision.tag == "pu_speed")
+        {
+            Destroy(collision.gameObject);
+            speed += 5;
+        }
     }
 }

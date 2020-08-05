@@ -650,7 +650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b11940134bdbe418fbe66a9ed5a21d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 5
   laser: {fileID: 3022892950768578215, guid: a5effb2a8eee97a47bca170fe13146aa, type: 3}
   laserReference: {fileID: 884289408}
   lives: 3
@@ -713,7 +713,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1426952460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.46, z: 0}
+  m_LocalPosition: {x: 0, y: -4.12, z: 0}
   m_LocalScale: {x: 0.43166, y: 0.43166, z: 0.43166}
   m_Children:
   - {fileID: 884289409}

@@ -7,24 +7,16 @@ public class SpawnController : MonoBehaviour {
     public GameObject asteroid;
     public GameObject powerUpSpeed;    
 
-    void Start() {
-        //InvokeRepeating("SpawnAsteroid", 1f, 2f);
+    void Start() {        
         StartCoroutine(SpawnAsteroid());
+        InvokeRepeating("SpawnPowerUp", 1f, 3f);
     }
 
 
-    void Update() {
-        //SpawnPowerUpSpeed();
-        StartCoroutine(SpawnPowerUpSpeed());   
-
+    void Update() {        
         //if(algoAcontecer == true)
             //StopCoroutine(SpawnAsteroid)
-    }
-
-    /*void SpawnAsteroid() {
-        Vector3 position = new Vector3(Random.Range(-7, 7), transform.position.y);
-        Instantiate(asteroid, position, Quaternion.identity);
-    }*/
+    }    
 
     IEnumerator SpawnAsteroid()
     {        
@@ -36,37 +28,16 @@ public class SpawnController : MonoBehaviour {
             int random = Random.Range(1, 5);
             yield return new WaitForSeconds(random);
         }        
-    }
+    }    
 
-    /*void SpawnPowerUpSpeed()
+    void SpawnPowerUp()
     {
-        if (powerUpSpeed.GetComponent<SpriteRenderer>().color.a <= 0)
-        {
-            powerUpSpeed = Instantiate(powerUpSpeed, powerUpSpeed.transform.position, Quaternion.identity);
-        }
-
-        for (float ft = 0; ft <= 1; ft += 0.001f)
-        {
-            Color c = powerUpSpeed.GetComponent<SpriteRenderer>().color;
-            c.a = ft + 0.001f;
-            powerUpSpeed.GetComponent<SpriteRenderer>().color = c;            
-        }
-    }*/
-
-    IEnumerator SpawnPowerUpSpeed()
-    {        
-        if(powerUpSpeed.GetComponent<SpriteRenderer>().color.a <= 0)
-        {
-            powerUpSpeed = Instantiate(powerUpSpeed, powerUpSpeed.transform.position, Quaternion.identity);            
-        }
-        
-        for (float ft = 0; ft <= 1; ft += 0.001f)
-        {
-            Color c = powerUpSpeed.GetComponent<SpriteRenderer>().color;
-            c.a = ft + 0.001f;
-            powerUpSpeed.GetComponent<SpriteRenderer>().color = c;
+        if (Random.Range(1, 5).Equals(2))
+        {            
+            Instantiate(powerUpSpeed,
+                        new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), powerUpSpeed.transform.position.z),
+                        Quaternion.identity);
             
-            yield return null;
-        }                
-    }
+        }                 
+    }    
 }
