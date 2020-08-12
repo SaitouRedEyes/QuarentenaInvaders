@@ -220,6 +220,8 @@ MonoBehaviour:
     type: 3}
   powerUpSpeed: {fileID: 8701779726588777567, guid: 246fea351a8c91247ab5908c1673c1b9,
     type: 3}
+  powerUpTripleShoot: {fileID: 5677563329030174719, guid: 6cd93643d4fde234fbd8a999ab893907,
+    type: 3}
 --- !u!4 &390545702
 Transform:
   m_ObjectHideFlags: 0

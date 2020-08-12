@@ -5,7 +5,8 @@ using UnityEngine;
 public class SpawnController : MonoBehaviour {
 
     public GameObject asteroid;
-    public GameObject powerUpSpeed;    
+    public GameObject powerUpSpeed;
+    public GameObject powerUpTripleShoot;
 
     void Start() {        
         StartCoroutine(SpawnAsteroid());
@@ -13,9 +14,9 @@ public class SpawnController : MonoBehaviour {
     }
 
 
-    void Update() {        
-        //if(algoAcontecer == true)
-            //StopCoroutine(SpawnAsteroid)
+    void Update() {
+        //if (algoAcontecer == true)
+            //StopCoroutine(SpawnAsteroid());
     }    
 
     IEnumerator SpawnAsteroid()
@@ -32,10 +33,19 @@ public class SpawnController : MonoBehaviour {
 
     void SpawnPowerUp()
     {
-        if (Random.Range(1, 5).Equals(2))
-        {            
-            Instantiate(powerUpSpeed,
-                        new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), powerUpSpeed.transform.position.z),
+        if (Random.Range(0, 3).Equals(2)) //aleatorizando a possibilidade de spawn power up
+        {
+            GameObject powerUp;
+
+            switch(Random.Range(0, 2))
+            {
+                case 0: powerUp = powerUpSpeed; break;
+                case 1: powerUp = powerUpTripleShoot; break;
+                default: powerUp = new GameObject(); break;
+            }                        
+
+            Instantiate(powerUp,
+                        new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), powerUp.transform.position.z),
                         Quaternion.identity);
             
         }                 

@@ -14,6 +14,9 @@ public class PlayerBehaviour : MonoBehaviour {
     public GameObject laserReference;
     public int lives = 3;
     public Text livesText;
+    private bool puTripleShoot = false;    
+    private int tripleShootCooldown = 3;
+    private int coolDownCurrentMaxTime = 0;
 
     void Start() {
 
@@ -23,6 +26,7 @@ public class PlayerBehaviour : MonoBehaviour {
         Moviment();
         Shoot();
         CheckLives();
+        if (puTripleShoot) CoolDown();        
     }
 
     void Moviment() {
@@ -42,7 +46,14 @@ public class PlayerBehaviour : MonoBehaviour {
 
     void Shoot() {
         if (Input.GetKeyDown(KeyCode.Space)) {
-            Instantiate(laser, laserReference.transform.position, Quaternion.identity);
+            
+            Instantiate(laser, laserReference.transform.position, Quaternion.identity).GetComponent<LaserBehaviour>().LaserBoost(0);
+
+            if (puTripleShoot)
+            {
+                Instantiate(laser, laserReference.transform.position, Quaternion.identity).GetComponent<LaserBehaviour>().LaserBoost(1);
+                Instantiate(laser, laserReference.transform.position, Quaternion.identity).GetComponent<LaserBehaviour>().LaserBoost(2);
+            }            
         }
     }
 
@@ -55,6 +66,15 @@ public class PlayerBehaviour : MonoBehaviour {
         }
     }
 
+    private void CoolDown()
+    {
+        if ((int)Time.time >= coolDownCurrentMaxTime)
+        {
+            puTripleShoot = false;
+        }
+        Debug.Log((int)Time.time + " " + coolDownCurrentMaxTime);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "asteroid") {
             Destroy(collision.gameObject);
@@ -64,6 +84,12 @@ public class PlayerBehaviour : MonoBehaviour {
         {
             Destroy(collision.gameObject);
             speed += 5;
+        }
+        else if (collision.tag == "pu_triple_shoot")
+        {
+            Destroy(collision.gameObject);
+            puTripleShoot = true;
+            coolDownCurrentMaxTime = (int)Time.time + tripleShootCooldown;            
         }
     }
 }
