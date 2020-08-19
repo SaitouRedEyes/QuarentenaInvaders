@@ -16,7 +16,10 @@ public class PlayerBehaviour : MonoBehaviour {
     public Text livesText;
     private bool puTripleShoot = false;    
     private int tripleShootCooldown = 3;
-    private int coolDownCurrentMaxTime = 0;
+    private int tripleShootCoolDownMaxTime = 0;
+    private bool puSpeed = false;
+    private int speedCooldown = 3;
+    private int speedCoolDownMaxTime = 0;
 
     void Start() {
 
@@ -26,7 +29,13 @@ public class PlayerBehaviour : MonoBehaviour {
         Moviment();
         Shoot();
         CheckLives();
-        if (puTripleShoot) CoolDown();        
+
+        if (puTripleShoot) {
+            TripleShootCoolDown();
+        }
+        if(puSpeed) {
+            SpeedCoolDown();
+        }
     }
 
     void Moviment() {
@@ -49,8 +58,7 @@ public class PlayerBehaviour : MonoBehaviour {
             
             Instantiate(laser, laserReference.transform.position, Quaternion.identity).GetComponent<LaserBehaviour>().LaserBoost(0);
 
-            if (puTripleShoot)
-            {
+            if (puTripleShoot) {
                 Instantiate(laser, laserReference.transform.position, Quaternion.identity).GetComponent<LaserBehaviour>().LaserBoost(1);
                 Instantiate(laser, laserReference.transform.position, Quaternion.identity).GetComponent<LaserBehaviour>().LaserBoost(2);
             }            
@@ -66,13 +74,26 @@ public class PlayerBehaviour : MonoBehaviour {
         }
     }
 
-    private void CoolDown()
+    private void TripleShootCoolDown()
     {
-        if ((int)Time.time >= coolDownCurrentMaxTime)
-        {
+        if ((int)Time.time >= tripleShootCoolDownMaxTime) {
             puTripleShoot = false;
-        }
-        Debug.Log((int)Time.time + " " + coolDownCurrentMaxTime);
+        }                        
+    }
+
+    private void SpeedCoolDown()
+    {
+        if ((int)Time.time >= speedCoolDownMaxTime) {
+
+            speed -= 5;
+
+            if (speed == 5) {
+                puSpeed = false;                
+            }
+            else {                
+                speedCoolDownMaxTime = (int)Time.time + speedCooldown;                
+            }
+        }        
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -80,16 +101,21 @@ public class PlayerBehaviour : MonoBehaviour {
             Destroy(collision.gameObject);
             lives--;
         }
-        else if(collision.tag == "pu_speed")
-        {
+        else if(collision.tag == "pu_speed") {
             Destroy(collision.gameObject);
             speed += 5;
+            puSpeed = true;
+            speedCoolDownMaxTime = (int)Time.time + speedCooldown;
         }
-        else if (collision.tag == "pu_triple_shoot")
-        {
+        else if (collision.tag == "pu_triple_shoot") {
             Destroy(collision.gameObject);
             puTripleShoot = true;
-            coolDownCurrentMaxTime = (int)Time.time + tripleShootCooldown;            
+            tripleShootCoolDownMaxTime = (int)Time.time + tripleShootCooldown;            
+        }
+        else if (collision.tag == "life")
+        {
+            Destroy(collision.gameObject);
+            lives += 1;
         }
     }
 }

@@ -222,6 +222,7 @@ MonoBehaviour:
     type: 3}
   powerUpTripleShoot: {fileID: 5677563329030174719, guid: 6cd93643d4fde234fbd8a999ab893907,
     type: 3}
+  life: {fileID: 1755173145771030439, guid: 2abd0ccbf2735604caa3a6f2e436682a, type: 3}
 --- !u!4 &390545702
 Transform:
   m_ObjectHideFlags: 0

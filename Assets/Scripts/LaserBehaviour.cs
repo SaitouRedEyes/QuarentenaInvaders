@@ -19,16 +19,14 @@ public class LaserBehaviour : MonoBehaviour {
     }
 
     void Update() {
-        switch (direction)
-        {
+        switch (direction) {
             case (int)Directions.Foward: transform.Translate(Vector3.up * speed * Time.deltaTime); break;
             case (int)Directions.LeftDiagonal: transform.Translate((Vector3.up + Vector3.left) * speed * Time.deltaTime); break;
             case (int)Directions.RightDiagonal: transform.Translate((Vector3.up + Vector3.right) * speed * Time.deltaTime); break;
         }
     }
 
-    public void LaserBoost(int newDirection)
-    {        
+    public void LaserBoost(int newDirection) {        
         direction = newDirection;
     }
 

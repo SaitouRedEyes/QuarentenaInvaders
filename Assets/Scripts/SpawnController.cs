@@ -7,6 +7,7 @@ public class SpawnController : MonoBehaviour {
     public GameObject asteroid;
     public GameObject powerUpSpeed;
     public GameObject powerUpTripleShoot;
+    public GameObject life;
 
     void Start() {        
         StartCoroutine(SpawnAsteroid());
@@ -15,14 +16,12 @@ public class SpawnController : MonoBehaviour {
 
 
     void Update() {
-        //if (algoAcontecer == true)
-            //StopCoroutine(SpawnAsteroid());
+        //if (bossFight == true)
+           // StopCoroutine(SpawnAsteroid());
     }    
 
-    IEnumerator SpawnAsteroid()
-    {        
-        while(true)
-        {
+    IEnumerator SpawnAsteroid() {        
+        while(true) {
             Vector3 position = new Vector3(Random.Range(-7, 7), transform.position.y);
             Instantiate(asteroid, position, Quaternion.identity);
 
@@ -31,16 +30,14 @@ public class SpawnController : MonoBehaviour {
         }        
     }    
 
-    void SpawnPowerUp()
-    {
-        if (Random.Range(0, 3).Equals(2)) //aleatorizando a possibilidade de spawn power up
-        {
+    void SpawnPowerUp() {
+        if (Random.Range(0, 3).Equals(2)) { //aleatorizando a possibilidade de spawn power up
             GameObject powerUp;
 
-            switch(Random.Range(0, 2))
-            {
+            switch(Random.Range(0f, 3f)) {
                 case 0: powerUp = powerUpSpeed; break;
                 case 1: powerUp = powerUpTripleShoot; break;
+                case 2: powerUp = life; break;
                 default: powerUp = new GameObject(); break;
             }                        
 

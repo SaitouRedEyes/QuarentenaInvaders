@@ -11,15 +11,12 @@ public class PowerUp : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         StartCoroutine(Fade());
     }
 
-    IEnumerator Fade()
-    {        
-        for (float ft = 0; ft <= 1; ft += 0.01f)
-        {
+    IEnumerator Fade() {        
+        for (float ft = 0; ft <= 1; ft += 0.01f) {
             Color c = this.GetComponent<SpriteRenderer>().color;
             c.a = ft + 0.001f;
             this.GetComponent<SpriteRenderer>().color = c;
